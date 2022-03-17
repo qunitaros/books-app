@@ -6,4 +6,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  belongs_to :bookcase, dependent: :destroy
+  belongs_to :cocktailcase, dependent: :destroy
+
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :email, presence: true, uniqueness: true
+  validates :birthday, presence: true
+  validates :profile, length: { maximum: 160 }
 end
