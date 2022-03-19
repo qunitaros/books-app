@@ -78,8 +78,12 @@ ActiveRecord::Schema.define(version: 2022_03_17_114818) do
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "content"
     t.bigint "user_id"
+    t.bigint "book_id"
+    t.bigint "cocktail_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_posts_on_book_id"
+    t.index ["cocktail_id"], name: "index_posts_on_cocktail_id"
     t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -118,5 +122,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_114818) do
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "posts"
   add_foreign_key "favorites", "users"
+  add_foreign_key "posts", "books", primary_key: "isbn"
+  add_foreign_key "posts", "cocktails", primary_key: "cocktail_id"
   add_foreign_key "posts", "users"
 end

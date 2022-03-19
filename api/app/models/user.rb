@@ -10,8 +10,10 @@ class User < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :posts, dependent: :destroy
-  belongs_to :bookcase, dependent: :destroy
-  belongs_to :cocktailcase, dependent: :destroy
+  has_many :bookcase, dependent: :destroy
+  has_many :cocktailcase, dependent: :destroy
+  has_many :book, dependent: :destroy
+  has_many :coctailcase, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, uniqueness: true
