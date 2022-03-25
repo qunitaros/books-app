@@ -19,4 +19,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates :birthday, presence: true
   validates :profile, length: { maximum: 160 }
+
+  mount_uploader :image, AvatorUploader
 end
